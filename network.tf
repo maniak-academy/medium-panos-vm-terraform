@@ -1,8 +1,8 @@
 
 resource "panos_management_profile" "mymgmtprofile" {
-  name = "allow stuff"
-  ssh  = true
-  ping = true
+  name          = "allow stuff"
+  ssh           = true
+  ping          = true
   permitted_ips = ["10.1.1.0/24", "10.1.2.0/24", "192.168.86.0/24"]
 }
 resource "panos_ethernet_interface" "untrust" {
@@ -11,25 +11,25 @@ resource "panos_ethernet_interface" "untrust" {
   mode                      = "layer3"
   enable_dhcp               = true
   create_dhcp_default_route = true
-  management_profile = panos_management_profile.mymgmtprofile.id
+  management_profile        = panos_management_profile.mymgmtprofile.id
 
 }
 
 resource "panos_ethernet_interface" "web" {
-  name        = "ethernet1/2"
-  vsys        = "vsys1"
-  mode        = "layer3"
-  static_ips  = ["10.1.1.1/24"]
-  enable_dhcp = false
+  name               = "ethernet1/2"
+  vsys               = "vsys1"
+  mode               = "layer3"
+  static_ips         = ["10.1.1.1/24"]
+  enable_dhcp        = false
   management_profile = panos_management_profile.mymgmtprofile.id
 }
 
 resource "panos_ethernet_interface" "secure" {
-  name        = "ethernet1/3"
-  vsys        = "vsys1"
-  mode        = "layer3"
-  static_ips  = ["10.1.2.1/24"]
-  enable_dhcp = false
+  name               = "ethernet1/3"
+  vsys               = "vsys1"
+  mode               = "layer3"
+  static_ips         = ["10.1.2.1/24"]
+  enable_dhcp        = false
   management_profile = panos_management_profile.mymgmtprofile.id
 
 }
